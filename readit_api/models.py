@@ -42,3 +42,40 @@ class Subreadit(models.Model):
 
     def __str__(self) -> str:
         return f"r/{self.name}"
+
+
+class Post(models.Model):
+    title = models.CharField(
+        max_length=500,
+        blank=False,
+        null=False,
+    )
+
+    # TODO: Expand this to include more types
+    text = models.CharField(
+        max_length=5000,
+        blank=True,
+        null=True,
+    )
+
+    posted_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="posts",
+    )
+
+    created_on = models.DateTimeField(auto_now=True)
+
+    # TODO: Add ability to cross-post later
+    posted_subreadit = models.ForeignKey(
+        Subreadit,
+        on_delete=models.CASCADE,
+        null=False,
+        related_name="posts",
+    )
+
+    class Meta:
+        ordering = ["created_on", "title"]
+
+    def __str__(self) -> str:
+        return self.title
