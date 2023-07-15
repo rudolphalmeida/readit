@@ -2,8 +2,9 @@ from typing import List
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
-from readit_api.models import Subreadit
+from readit_api.models import Post, Subreadit
 from readit_api.serializers import (
+    PostSerializer,
     SubreaditSerializer,
     UserSerializer,
     GroupSerializer,
@@ -33,4 +34,10 @@ class GroupViewSet(viewsets.ModelViewSet):
 class SubreaditViewSet(viewsets.ModelViewSet):
     queryset = Subreadit.objects.all()
     serializer_class = SubreaditSerializer
+    permission_classes: List[type] = []
+
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
     permission_classes: List[type] = []
