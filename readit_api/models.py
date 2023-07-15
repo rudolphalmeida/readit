@@ -12,11 +12,7 @@ User.add_to_class("__str__", str_username)
 
 
 class Subreadit(models.Model):
-    name = models.CharField(
-        max_length=100,
-        blank=False,
-        null=False,
-    )
+    name = models.CharField(max_length=100, blank=False, null=False)
 
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -45,18 +41,10 @@ class Subreadit(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField(
-        max_length=500,
-        blank=False,
-        null=False,
-    )
+    title = models.CharField(max_length=500, blank=False, null=False)
 
     # TODO: Expand this to include more types
-    text = models.CharField(
-        max_length=5000,
-        blank=True,
-        null=True,
-    )
+    text = models.CharField(max_length=5000, blank=True, null=True)
 
     posted_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -68,10 +56,7 @@ class Post(models.Model):
 
     # TODO: Add ability to cross-post later
     posted_subreadit = models.ForeignKey(
-        Subreadit,
-        on_delete=models.CASCADE,
-        null=False,
-        related_name="posts",
+        Subreadit, on_delete=models.CASCADE, null=False, related_name="posts"
     )
 
     class Meta:
