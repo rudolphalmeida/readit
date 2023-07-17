@@ -11,16 +11,16 @@ import { AppComponent } from './app.component';
 import { UserHomeComponent } from './user-home/user-home.component';
 
 @NgModule({
-  declarations: [AppComponent, UserHomeComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    HttpClientModule,
-    MatCardModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent, UserHomeComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        HttpClientModule,
+        MatCardModule,
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

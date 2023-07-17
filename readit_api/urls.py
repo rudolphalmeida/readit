@@ -1,6 +1,5 @@
 from django.urls import include, path
 from rest_framework import routers
-from knox import views as knox_views
 
 from readit_api import views
 
