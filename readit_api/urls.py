@@ -1,5 +1,7 @@
 from django.urls import include, path
 from rest_framework import routers
+from knox import views as knox_views
+
 from readit_api import views
 
 router = routers.DefaultRouter()
@@ -12,6 +14,7 @@ router.register(r"posts", views.PostViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path("", include(router.urls)),
+    path(r"auth/", include("knox.urls")),
     path(
         "api-auth/",
         include("rest_framework.urls", namespace="rest_framework"),

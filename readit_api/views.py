@@ -1,7 +1,9 @@
 from typing import List
+
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
+
 from readit_api.models import Post, Subreadit
 from readit_api.serializers import (
     PostSerializer,

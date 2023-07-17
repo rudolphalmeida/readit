@@ -36,6 +36,7 @@ REST_FRAMEWORK = {
 
 INSTALLED_APPS = [
     "rest_framework",
+    "knox",
     "corsheaders",
     "readit_api.apps.ReaditApiConfig",
     "django.contrib.admin",
