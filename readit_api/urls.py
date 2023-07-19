@@ -13,9 +13,6 @@ router.register(r"posts", views.PostViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path("", include(router.urls)),
+    path(r"auth/login/", views.LoginView.as_view(), name="knox_login"),
     path(r"auth/", include("knox.urls")),
-    path(
-        "api-auth/",
-        include("rest_framework.urls", namespace="rest_framework"),
-    ),
 ]

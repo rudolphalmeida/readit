@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { PostList } from './post';
+import { apiUrl } from '../api-util';
 
 @Injectable({
     providedIn: 'root',
@@ -11,8 +12,6 @@ export class PostService {
     constructor(private http: HttpClient) {}
 
     getPosts(): Observable<PostList> {
-        return this.http.get(
-            'http://127.0.0.1:8000/api/posts',
-        ) as Observable<PostList>;
+        return this.http.get(apiUrl('posts')) as Observable<PostList>;
     }
 }
