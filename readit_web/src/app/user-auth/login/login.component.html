@@ -1,0 +1,9 @@
+<div *ngIf="isLoggedIn">Logged In</div>
+<button
+    mat-flat-button
+    color="primary"
+    *ngIf="!isLoggedIn"
+    (click)="openLoginDialog()"
+>
+    Login
+</button>
