@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { AuthenticatedUser } from './user-auth';
 import { apiUrl } from '../api-util';
+import { Observable, firstValueFrom, takeUntil } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -12,11 +13,13 @@ export class UserAuthService {
 
     constructor(private http: HttpClient) {}
 
-    login(username: string, password: string) {
-        this.http.post(apiUrl('auth/login'), {
-            username: username,
-            password: password,
-        });
+    async login(username: string, password: string) {
+        this.user = (await firstValueFrom(
+            this.http.post(apiUrl('auth/login/'), {
+                username: username,
+                password: password,
+            }),
+        )) as AuthenticatedUser;
     }
 
     get isLoggedIn(): boolean {

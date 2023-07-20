@@ -25,7 +25,6 @@ export class UserHomeComponent implements OnInit {
                 this.posts = postList.results;
                 this.next_posts_page = postList.next;
                 this.previous_posts_page = postList.previous;
-                console.log('Fetched ' + postList.count + ' posts');
             },
             error: (error) => {
                 console.log(error);

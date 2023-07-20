@@ -2,12 +2,17 @@
 <mat-dialog-content>
     <mat-form-field appearance="fill">
         <mat-label>Username</mat-label>
-        <input matInput placeholder="Enter username" />
+        <input matInput placeholder="Enter username" [formControl]="username" />
+        <mat-error> Email is <strong>required</strong> </mat-error>
     </mat-form-field>
 
     <mat-form-field>
         <mat-label>Enter your password</mat-label>
-        <input matInput [type]="showPassword ? 'text' : 'password'" />
+        <input
+            matInput
+            [type]="showPassword ? 'text' : 'password'"
+            [formControl]="password"
+        />
         <button
             mat-icon-button
             matSuffix
@@ -19,6 +24,7 @@
                 showPassword ? "visibility" : "visibility_off"
             }}</mat-icon>
         </button>
+        <mat-error> Password is <strong>required</strong> </mat-error>
     </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>

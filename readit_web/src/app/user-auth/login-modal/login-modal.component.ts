@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { UserAuthService } from '../user-auth.service';
+import { FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-login-modal',
@@ -10,27 +12,30 @@ import { UserAuthService } from '../user-auth.service';
 export class LoginModalComponent {
     showPassword: boolean = false;
 
-    username: string = '';
-    password: string = '';
+    username = new FormControl('', [Validators.required]);
+    password = new FormControl('', [Validators.required]);
 
     constructor(
         public dialogRef: MatDialogRef<LoginModalComponent>,
         private userAuthService: UserAuthService,
+        private snackBar: MatSnackBar,
     ) {}
 
-    loginUser() {
-        if (!this.username) {
-            // TODO: Show username hint
-        }
-
-        if (!this.password) {
-            // TODO: Show password hint
-        }
-
-        if (!this.username || !this.password) {
+    async loginUser() {
+        if (!this.username.value || !this.password.value) {
             return;
         }
 
-        this.userAuthService.login(this.username, this.password);
+        await this.userAuthService.login(
+            this.username.value,
+            this.password.value,
+        );
+
+        if (this.userAuthService.isLoggedIn) {
+            this.dialogRef.close();
+        } else {
+            this.password.setValue('');
+            this.snackBar.open('Login failed');
+        }
     }
 }

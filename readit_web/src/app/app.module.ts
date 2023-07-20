@@ -7,12 +7,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { UserHomeComponent } from './user-home/user-home.component';
 import { LoginComponent } from './user-auth/login/login.component';
 import { LoginModalComponent } from './user-auth/login-modal/login-modal.component';
@@ -25,6 +26,8 @@ import { LoginModalComponent } from './user-auth/login-modal/login-modal.compone
         LoginModalComponent,
     ],
     imports: [
+        FormsModule,
+        ReactiveFormsModule,
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
@@ -36,6 +39,7 @@ import { LoginModalComponent } from './user-auth/login-modal/login-modal.compone
         MatFormFieldModule,
         MatInputModule,
         MatIconModule,
+        MatSnackBarModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
