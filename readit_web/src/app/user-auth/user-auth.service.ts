@@ -4,7 +4,7 @@ import { Observable, firstValueFrom, takeUntil } from 'rxjs';
 
 import { AuthenticatedUser } from './user-auth';
 import { apiUrl } from '../api-util';
-import {formatUsername} from "../util";
+import {formatUsername, StorageKeys} from "../util";
 
 @Injectable({
     providedIn: 'root',
@@ -12,7 +12,15 @@ import {formatUsername} from "../util";
 export class UserAuthService {
     user: AuthenticatedUser | null = null;
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
+        this.user = this.loadAuthUserFromLocalStorage();
+        if (!this.user) return;
+
+        // Remove the token if it has expired. Have the user login again
+        if (this.user.expiry < new Date()) {
+            this.removeAuthUserFromLocalStorage();
+        }
+    }
 
     async login(username: string, password: string) {
         const credentials = btoa(`${username}:${password}`);
@@ -29,7 +37,29 @@ export class UserAuthService {
             ),
         )) as AuthenticatedUser;
 
-        console.log(this.user);
+        this.storeAuthUserToLocalStorage(this.user);
+    }
+
+    loadAuthUserFromLocalStorage(): AuthenticatedUser | null {
+        let token = localStorage.getItem(StorageKeys.AuthToken);
+        if (!token) return null;
+
+        let user = localStorage.getItem(StorageKeys.AuthUser);
+        if (!user) return null;
+
+        let parsedToken = JSON.parse(token);
+        return  { user: JSON.parse(user), token: parsedToken.token, expiry: new Date(parsedToken.expiry)  };
+    }
+
+    storeAuthUserToLocalStorage(authUser: AuthenticatedUser) {
+        const token = JSON.stringify({ token: authUser.token, expiry: authUser.expiry });
+        localStorage.setItem(StorageKeys.AuthToken, token);
+        localStorage.setItem(StorageKeys.AuthUser, JSON.stringify(authUser.user));
+    }
+
+    removeAuthUserFromLocalStorage() {
+        localStorage.removeItem(StorageKeys.AuthToken);
+        localStorage.removeItem(StorageKeys.AuthUser);
     }
 
     get isLoggedIn(): boolean {
