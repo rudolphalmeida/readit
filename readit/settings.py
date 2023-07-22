@@ -33,12 +33,14 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": ("knox.auth.TokenAuthentication",),
 }
 
+CORS_ALLOW_CREDENTIALS: bool = True
+
 # Application definition
 
 INSTALLED_APPS = [
+    "corsheaders",
     "rest_framework",
     "knox",
-    "corsheaders",
     "readit_api.apps.ReaditApiConfig",
     "django.contrib.admin",
     "django.contrib.auth",
