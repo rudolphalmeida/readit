@@ -8,4 +8,5 @@ export interface User {
 export interface AuthenticatedUser {
     user: User;
     token: string;
+    expiry: Date,
 }

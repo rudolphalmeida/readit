@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, firstValueFrom, takeUntil } from 'rxjs';
 
 import { AuthenticatedUser } from './user-auth';
 import { apiUrl } from '../api-util';
-import { Observable, firstValueFrom, takeUntil } from 'rxjs';
+import {formatUsername} from "../util";
 
 @Injectable({
     providedIn: 'root',
@@ -33,5 +34,11 @@ export class UserAuthService {
 
     get isLoggedIn(): boolean {
         return this.user != null;
+    }
+
+    get loggedInUserName(): string | null {
+        let username = this.user?.user.username;
+        if (!username) return null;
+        return formatUsername(username);
     }
 }

@@ -12,9 +12,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             "username",
             "email",
             "groups",
-            "subscribes",
-            "owns",
-            "posts",
         ]
 
 

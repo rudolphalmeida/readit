@@ -1,4 +1,4 @@
-<div *ngIf="isLoggedIn">Logged In</div>
+<div *ngIf="isLoggedIn && username">{{ username }}</div>
 <button
     mat-flat-button
     color="primary"

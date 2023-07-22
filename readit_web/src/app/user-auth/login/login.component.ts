@@ -20,6 +20,10 @@ export class LoginComponent {
         return this.userAuthService.isLoggedIn;
     }
 
+    get username(): string | null {
+        return this.userAuthService.loggedInUserName;
+    }
+
     openLoginDialog(): void {
         const dialogRef = this.dialog.open(LoginModalComponent, {});
         dialogRef
