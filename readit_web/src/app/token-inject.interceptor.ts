@@ -18,7 +18,7 @@ export class TokenInjectInterceptor implements HttpInterceptor {
         let token = this.userAuthService.loggedInUserToken;
         // Add the token to the headers if
         if (token) {
-            request.headers.append('Authorization', `Token`);
+            request.headers.append('Authorization', `Token ${token}`);
         }
         return next.handle(request);
     }
