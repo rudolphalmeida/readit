@@ -1,11 +1,11 @@
 from typing import List
 
 from django.contrib.auth.models import User, Group
+from knox.auth import TokenAuthentication
 from rest_framework import viewsets
 from rest_framework import permissions
 from knox.views import LoginView as KnoxLoginView
 from rest_framework.authentication import BasicAuthentication
-
 
 from readit_api.models import Post, Subreadit
 from readit_api.serializers import (
@@ -27,7 +27,8 @@ class UserViewSet(viewsets.ModelViewSet):
 
     queryset = User.objects.all().order_by("-date_joined")
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (TokenAuthentication,)
 
 
 class GroupViewSet(viewsets.ModelViewSet):

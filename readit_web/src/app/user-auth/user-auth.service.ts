@@ -71,4 +71,10 @@ export class UserAuthService {
         if (!username) return null;
         return formatUsername(username);
     }
+
+    get loggedInUserToken(): string | null {
+        let token = this.user?.token;
+        if (!token) return null;
+        return token;
+    }
 }
