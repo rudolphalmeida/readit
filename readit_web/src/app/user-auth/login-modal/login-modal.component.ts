@@ -32,10 +32,15 @@ export class LoginModalComponent {
         );
 
         if (this.userAuthService.isLoggedIn) {
-            this.dialogRef.close();
+            this.snackBar.open('Logged in successfully', undefined, {
+                duration: 3000
+            });
+            this.dialogRef.close(true);
         } else {
             this.password.setValue('');
-            this.snackBar.open('Login failed');
+            this.snackBar.open('Login failed', undefined, {
+                duration: 3000
+            });
         }
     }
 }

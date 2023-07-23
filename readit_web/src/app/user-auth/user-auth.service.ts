@@ -40,6 +40,15 @@ export class UserAuthService {
         this.storeAuthUserToLocalStorage(this.user);
     }
 
+    async logout() {
+        this.http.post(
+            apiUrl('auth/logout/'), {}, {withCredentials: true}
+        ).subscribe((_) => {
+            this.removeAuthUserFromLocalStorage();
+            this.user = null;
+        });
+    }
+
     loadAuthUserFromLocalStorage(): AuthenticatedUser | null {
         let token = localStorage.getItem(StorageKeys.AuthToken);
         if (!token) return null;

@@ -1,4 +1,10 @@
-<div *ngIf="isLoggedIn && username">{{ username }}</div>
+<button mat-button *ngIf="isLoggedIn && username" [matMenuTriggerFor]="menu">
+    {{ username }}
+</button>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item>Profile</button>
+    <button mat-menu-item (click)="logoutUser()">Logout</button>
+</mat-menu>
 <button
     mat-flat-button
     color="primary"

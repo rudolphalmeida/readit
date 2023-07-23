@@ -16,9 +16,11 @@ export class TokenInjectInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
         let token = this.userAuthService.loggedInUserToken;
-        // Add the token to the headers if
+        // Add the token to the headers if it exists
         if (token) {
-            request.headers.append('Authorization', `Token ${token}`);
+            let headers = request.headers;
+            headers = headers.append('Authorization', `Token ${token}`);
+            request = request.clone({headers: headers});
         }
         return next.handle(request);
     }

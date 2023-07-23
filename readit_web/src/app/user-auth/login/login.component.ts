@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserAuthService } from '../user-auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginModalComponent } from '../login-modal/login-modal.component';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
     selector: 'readit-login-component',
@@ -14,6 +15,7 @@ export class LoginComponent {
     constructor(
         private userAuthService: UserAuthService,
         public dialog: MatDialog,
+        private snackBar: MatSnackBar,
     ) {}
 
     get isLoggedIn(): boolean {
@@ -28,6 +30,13 @@ export class LoginComponent {
         const dialogRef = this.dialog.open(LoginModalComponent, {});
         dialogRef
             .afterClosed()
-            .subscribe((something) => console.log(something));
+            .subscribe((_loggedIn: boolean) => {});
+    }
+
+    async logoutUser() {
+        await this.userAuthService.logout();
+        this.snackBar.open('Logged out successfully', undefined, {
+            duration: 3000
+        });
     }
 }

@@ -9,14 +9,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatInputModule } from '@angular/material/input';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatMenuModule} from '@angular/material/menu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserHomeComponent } from './user-home/user-home.component';
 import { LoginComponent } from './user-auth/login/login.component';
 import { LoginModalComponent } from './user-auth/login-modal/login-modal.component';
+import {TokenInjectInterceptor} from "./token-inject.interceptor";
 
 @NgModule({
     declarations: [
@@ -40,8 +42,9 @@ import { LoginModalComponent } from './user-auth/login-modal/login-modal.compone
         MatInputModule,
         MatIconModule,
         MatSnackBarModule,
+        MatMenuModule,
     ],
-    providers: [],
+    providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInjectInterceptor, multi: true },],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
