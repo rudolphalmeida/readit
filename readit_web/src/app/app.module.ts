@@ -19,6 +19,7 @@ import { UserHomeComponent } from './user-home/user-home.component';
 import { LoginComponent } from './user-auth/login/login.component';
 import { LoginModalComponent } from './user-auth/login-modal/login-modal.component';
 import {TokenInjectInterceptor} from "./token-inject.interceptor";
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import {TokenInjectInterceptor} from "./token-inject.interceptor";
         UserHomeComponent,
         LoginComponent,
         LoginModalComponent,
+        UserProfileComponent,
     ],
     imports: [
         FormsModule,

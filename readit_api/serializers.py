@@ -4,6 +4,20 @@ from rest_framework import serializers
 from readit_api.models import Post, Subreadit
 
 
+class UserDetailSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            "url",
+            "username",
+            "email",
+            "groups",
+            "created",
+            "subscribes",
+            "posts",
+        ]
+
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User

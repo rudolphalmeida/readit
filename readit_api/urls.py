@@ -15,4 +15,6 @@ urlpatterns = [
     path("", include(router.urls)),
     path(r"auth/login/", views.LoginView.as_view(), name="knox_login"),
     path(r"auth/", include("knox.urls")),
+    path(r"u/<str:username>/", views.UserDetailView.as_view(), name="user_profile"),
+    path("api-auth/", include("rest_framework.urls")),
 ]

@@ -78,7 +78,7 @@ export class UserAuthService {
     get loggedInUserName(): string | null {
         let username = this.user?.user.username;
         if (!username) return null;
-        return formatUsername(username);
+        return username;
     }
 
     get loggedInUserToken(): string | null {
