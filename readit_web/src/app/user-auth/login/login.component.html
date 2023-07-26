@@ -1,5 +1,5 @@
 <button mat-button *ngIf="isLoggedIn && username" [matMenuTriggerFor]="menu">
-    {{ username }}
+    {{ username | asUsername }}
 </button>
 <mat-menu #menu="matMenu">
     <button mat-menu-item [routerLink]="['u', username]">Profile</button>

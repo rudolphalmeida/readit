@@ -20,6 +20,7 @@ import { LoginComponent } from './user-auth/login/login.component';
 import { LoginModalComponent } from './user-auth/login-modal/login-modal.component';
 import {TokenInjectInterceptor} from "./token-inject.interceptor";
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AsUsernamePipe } from './as-username.pipe';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
         LoginComponent,
         LoginModalComponent,
         UserProfileComponent,
+        AsUsernamePipe,
     ],
     imports: [
         FormsModule,
