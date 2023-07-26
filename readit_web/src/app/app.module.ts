@@ -12,6 +12,10 @@ import { MatInputModule } from '@angular/material/input';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +25,9 @@ import { LoginModalComponent } from './user-auth/login-modal/login-modal.compone
 import {TokenInjectInterceptor} from "./token-inject.interceptor";
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AsUsernamePipe } from './as-username.pipe';
+
+
+registerLocaleData(en);
 
 @NgModule({
     declarations: [
@@ -48,7 +55,10 @@ import { AsUsernamePipe } from './as-username.pipe';
         MatSnackBarModule,
         MatMenuModule,
     ],
-    providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInjectInterceptor, multi: true },],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: TokenInjectInterceptor, multi: true },
+        { provide: NZ_I18N, useValue: en_US },
+    ],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

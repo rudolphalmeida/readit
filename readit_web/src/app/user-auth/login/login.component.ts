@@ -3,7 +3,6 @@ import {UserAuthService} from '../user-auth.service';
 import {MatDialog} from '@angular/material/dialog';
 import {LoginModalComponent} from '../login-modal/login-modal.component';
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {formatUsername} from "../../util";
 
 @Component({
     selector: 'readit-login-component',

@@ -4,7 +4,7 @@ import { Observable, firstValueFrom, takeUntil } from 'rxjs';
 
 import { AuthenticatedUser } from './user-auth';
 import { apiUrl } from '../api-util';
-import {formatUsername, StorageKeys} from "../util";
+import {StorageKeys} from "../util";
 
 @Injectable({
     providedIn: 'root',

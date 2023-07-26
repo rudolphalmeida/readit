@@ -4,20 +4,6 @@ from rest_framework import serializers
 from readit_api.models import Post, Subreadit
 
 
-class UserDetailSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = [
-            "url",
-            "username",
-            "email",
-            "groups",
-            "created",
-            "subscribes",
-            "posts",
-        ]
-
-
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
@@ -25,23 +11,22 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             "url",
             "username",
             "email",
-            "groups",
         ]
 
 
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ["url", "name"]
+class SubreaditSerializer(serializers.ModelSerializer):
+    creator = serializers.StringRelatedField()
+    owner = serializers.StringRelatedField()
 
-
-class SubreaditSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Subreadit
-        fields = ["name", "creator", "owner", "posts", "subscribers"]
+        fields = ["name", "creator", "owner"]
 
 
-class PostSerializer(serializers.HyperlinkedModelSerializer):
+class PostSerializer(serializers.ModelSerializer):
+    posted_by = UserSerializer()
+    posted_subreadit = SubreaditSerializer()
+
     class Meta:
         model = Post
         fields = [
@@ -50,4 +35,21 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
             "posted_by",
             "created_on",
             "posted_subreadit",
+        ]
+
+
+class UserDetailSerializer(serializers.HyperlinkedModelSerializer):
+    created = SubreaditSerializer(many=True)
+    subscribes = SubreaditSerializer(many=True)
+    posts = PostSerializer(many=True)
+
+    class Meta:
+        model = User
+        fields = [
+            "url",
+            "username",
+            "email",
+            "created",
+            "subscribes",
+            "posts",
         ]
