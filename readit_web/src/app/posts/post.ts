@@ -1,12 +1,9 @@
-import {User} from "../user-auth/user-auth";
-import {Subreadit} from "../subreadit";
-
 export interface Post {
     title: string;
     text: string;
-    posted_by: User;
+    posted_by: string;
     created_on: Date;
-    posted_subreadit: Subreadit;
+    posted_subreadit: string;
 }
 
 export interface PostList {

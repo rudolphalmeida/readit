@@ -1,27 +1,28 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatInputModule } from '@angular/material/input';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatMenuModule} from '@angular/material/menu';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatCardModule } from "@angular/material/card";
+import { MatButtonModule } from "@angular/material/button";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatIconModule } from "@angular/material/icon";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatInputModule } from "@angular/material/input";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatMenuModule } from "@angular/material/menu";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { UserHomeComponent } from './user-home/user-home.component';
-import { LoginComponent } from './user-auth/login/login.component';
-import { LoginModalComponent } from './user-auth/login-modal/login-modal.component';
-import {TokenInjectInterceptor} from "./token-inject.interceptor";
-import { UserProfileComponent } from './user-profile/user-profile.component';
-import { AsUsernamePipe } from './as-username.pipe';
-import { PostListComponent } from './post-list/post-list.component';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { UserHomeComponent } from "./user-home/user-home.component";
+import { LoginComponent } from "./user-auth/login/login.component";
+import { LoginModalComponent } from "./user-auth/login-modal/login-modal.component";
+import { TokenInjectInterceptor } from "./utils/token-inject.interceptor";
+import { UserProfileComponent } from "./user-profile/user-profile.component";
+import { AsUsernamePipe } from "./utils/as-username.pipe";
+import { PostListComponent } from "./post-list/post-list.component";
+import { AsSubreaditPipe } from './utils/as-subreadit.pipe';
 
 @NgModule({
     declarations: [
@@ -32,6 +33,7 @@ import { PostListComponent } from './post-list/post-list.component';
         UserProfileComponent,
         AsUsernamePipe,
         PostListComponent,
+        AsSubreaditPipe,
     ],
     imports: [
         FormsModule,
@@ -50,9 +52,7 @@ import { PostListComponent } from './post-list/post-list.component';
         MatSnackBarModule,
         MatMenuModule,
     ],
-    providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: TokenInjectInterceptor, multi: true },
-    ],
+    providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInjectInterceptor, multi: true }],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

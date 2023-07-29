@@ -3,8 +3,8 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { firstValueFrom } from "rxjs";
 
 import { AuthenticatedUser } from "./user-auth";
-import { apiUrl } from "../api-util";
-import { StorageKeys } from "../util";
+import { apiUrl } from "../utils/api-util";
+import { StorageKeys } from "../utils/util";
 
 @Injectable({
     providedIn: "root",

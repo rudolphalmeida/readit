@@ -42,7 +42,7 @@ class SubreaditSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
     posted_by = serializers.SlugRelatedField(read_only=True, slug_field="username")
-    posted_subreadit = SubreaditSerializer()
+    posted_subreadit = serializers.SlugRelatedField(read_only=True, slug_field="name")
 
     class Meta:
         model = Post

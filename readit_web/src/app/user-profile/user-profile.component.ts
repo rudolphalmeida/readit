@@ -3,7 +3,7 @@ import { UserAuthService } from "../user-auth/user-auth.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { firstValueFrom } from "rxjs";
-import { apiUrl } from "../api-util";
+import { apiUrl } from "../utils/api-util";
 import { User } from "../user-auth/user-auth";
 
 @Component({
