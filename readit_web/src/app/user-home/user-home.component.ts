@@ -5,7 +5,7 @@ import { Post, PostList } from "../posts/post";
 import { BehaviorSubject } from "rxjs";
 
 @Component({
-    selector: "app-user-home",
+    selector: "readit-user-home",
     templateUrl: "./user-home.component.html",
     styleUrls: ["./user-home.component.less"],
 })
