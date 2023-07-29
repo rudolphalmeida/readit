@@ -1,17 +1,34 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from rest_framework import serializers
+from rest_framework.reverse import reverse
 
 from readit_api.models import Post, Subreadit
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
+    posts_url = serializers.HyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name="user_posts",
+        lookup_field="username",
+        lookup_url_kwarg="username",
+    )
+
     class Meta:
         model = User
         fields = [
-            "url",
+            "id",
             "username",
             "email",
+            "posts_url",
         ]
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["posts_url"] = self.context["request"].build_absolute_uri(
+            reverse("user_posts", kwargs={"username": instance.username})
+        )
+        return data
 
 
 class SubreaditSerializer(serializers.ModelSerializer):
@@ -24,7 +41,7 @@ class SubreaditSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    posted_by = UserSerializer()
+    posted_by = serializers.SlugRelatedField(read_only=True, slug_field="username")
     posted_subreadit = SubreaditSerializer()
 
     class Meta:
@@ -35,21 +52,4 @@ class PostSerializer(serializers.ModelSerializer):
             "posted_by",
             "created_on",
             "posted_subreadit",
-        ]
-
-
-class UserDetailSerializer(serializers.HyperlinkedModelSerializer):
-    created = SubreaditSerializer(many=True)
-    subscribes = SubreaditSerializer(many=True)
-    posts = PostSerializer(many=True)
-
-    class Meta:
-        model = User
-        fields = [
-            "url",
-            "username",
-            "email",
-            "created",
-            "subscribes",
-            "posts",
         ]

@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, firstValueFrom, takeUntil } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { firstValueFrom } from "rxjs";
 
-import { AuthenticatedUser } from './user-auth';
-import { apiUrl } from '../api-util';
-import {StorageKeys} from "../util";
+import { AuthenticatedUser } from "./user-auth";
+import { apiUrl } from "../api-util";
+import { StorageKeys } from "../util";
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: "root",
 })
 export class UserAuthService {
     user: AuthenticatedUser | null = null;
@@ -25,13 +25,14 @@ export class UserAuthService {
     async login(username: string, password: string) {
         const credentials = btoa(`${username}:${password}`);
 
-        let httpHeaders = new HttpHeaders();
-        httpHeaders.append('Content-Type', 'application/json');
-        httpHeaders.append('Authorization', `Basic ${credentials}`);
+        let httpHeaders = new HttpHeaders()
+            .append("Content-Type", "application/json")
+            .append("Authorization", `Basic ${credentials}`)
+            .append("X-Requested-With", "XMLHttpRequest");
 
         this.user = (await firstValueFrom(
             this.http.post(
-                apiUrl('auth/login/'),
+                apiUrl("auth/login/"),
                 {},
                 { headers: httpHeaders, withCredentials: true },
             ),
@@ -41,9 +42,7 @@ export class UserAuthService {
     }
 
     async logout() {
-        this.http.post(
-            apiUrl('auth/logout/'), {}, {withCredentials: true}
-        ).subscribe((_) => {
+        this.http.post(apiUrl("auth/logout/"), {}, { withCredentials: true }).subscribe((_) => {
             this.removeAuthUserFromLocalStorage();
             this.user = null;
         });
@@ -57,7 +56,11 @@ export class UserAuthService {
         if (!user) return null;
 
         let parsedToken = JSON.parse(token);
-        return  { user: JSON.parse(user), token: parsedToken.token, expiry: new Date(parsedToken.expiry)  };
+        return {
+            user: JSON.parse(user),
+            token: parsedToken.token,
+            expiry: new Date(parsedToken.expiry),
+        };
     }
 
     storeAuthUserToLocalStorage(authUser: AuthenticatedUser) {

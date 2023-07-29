@@ -11,9 +11,13 @@ router.register(r"posts", views.PostViewSet)
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
+    path(
+        "posts/<str:username>",
+        views.PostViewSet.as_view({"get": "list"}),
+        name="user_posts",
+    ),
     path("", include(router.urls)),
     path(r"auth/login/", views.LoginView.as_view(), name="knox_login"),
     path(r"auth/", include("knox.urls")),
-    path(r"u/<str:username>/", views.UserDetailView.as_view(), name="user_profile"),
     path("api-auth/", include("rest_framework.urls")),
 ]

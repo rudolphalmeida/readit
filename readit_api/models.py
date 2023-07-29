@@ -1,14 +1,6 @@
 from django.conf import settings
-from django.db import models
 from django.contrib.auth.models import User
-
-
-def str_username(self):
-    return f"u/{self.username}"
-
-
-# Override the inbuilt `User`s `__str__` to print with a leading "u/"
-User.add_to_class("__str__", str_username)
+from django.db import models
 
 
 class Subreadit(models.Model):

@@ -1,11 +1,12 @@
 export interface User {
-    url: string;
+    id: number;
     username: string;
     email: string;
+    posts_url: string;
 }
 
 export interface AuthenticatedUser {
     user: User;
     token: string;
-    expiry: Date,
+    expiry: Date;
 }
