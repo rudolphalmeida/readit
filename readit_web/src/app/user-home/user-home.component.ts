@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
-import { PostService } from '../posts/post.service';
-import { Post, PostList } from '../posts/post';
+import { PostService } from "../posts/post.service";
+import { Post, PostList } from "../posts/post";
+import { BehaviorSubject } from "rxjs";
 
 @Component({
-    selector: 'app-user-home',
-    templateUrl: './user-home.component.html',
-    styleUrls: ['./user-home.component.less'],
+    selector: "app-user-home",
+    templateUrl: "./user-home.component.html",
+    styleUrls: ["./user-home.component.less"],
 })
 export class UserHomeComponent implements OnInit {
-    posts: Post[] = [];
+    posts: BehaviorSubject<Post[]> = new BehaviorSubject<Post[]>([]);
     next_posts_page: string | null = null;
     previous_posts_page: string | null = null;
 
@@ -22,7 +23,7 @@ export class UserHomeComponent implements OnInit {
     getPosts() {
         this.postService.getPosts().subscribe({
             next: (postList: PostList) => {
-                this.posts = postList.results;
+                this.posts.next(postList.results);
                 this.next_posts_page = postList.next;
                 this.previous_posts_page = postList.previous;
             },
@@ -31,4 +32,8 @@ export class UserHomeComponent implements OnInit {
             },
         });
     }
+
+    loadNextPageOfPosts(): void {}
+
+    loadPreviousPageOfPosts(): void {}
 }

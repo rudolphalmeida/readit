@@ -21,6 +21,7 @@ import { LoginModalComponent } from './user-auth/login-modal/login-modal.compone
 import {TokenInjectInterceptor} from "./token-inject.interceptor";
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AsUsernamePipe } from './as-username.pipe';
+import { PostListComponent } from './post-list/post-list.component';
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { AsUsernamePipe } from './as-username.pipe';
         LoginModalComponent,
         UserProfileComponent,
         AsUsernamePipe,
+        PostListComponent,
     ],
     imports: [
         FormsModule,
