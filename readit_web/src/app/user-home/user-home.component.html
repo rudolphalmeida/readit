@@ -1,6 +1,6 @@
 <div id="home-posts-container">
-    <readit-post-list [posts]="posts"
-                      (loadNextPage)="loadNextPageOfPosts()"
-                      (loadPreviousPage)="loadPreviousPageOfPosts()">
+    <readit-post-list [posts]="home_posts"
+                      (loadPreviousPage)="loadPrevHomePosts()"
+                      (loadNextPage)="loadNextHomePosts()">
     </readit-post-list>
 </div>

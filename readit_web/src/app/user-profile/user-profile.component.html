@@ -1,1 +1,10 @@
-{{ user_details | json }}
+<mat-tab-group>
+    <mat-tab label="Posts">
+        <readit-post-list [posts]="posts"
+                          (loadPreviousPage)="loadPrevHomePosts()"
+                          (loadNextPage)="loadNextHomePosts()">
+        </readit-post-list>
+    </mat-tab>
+    <mat-tab label="Subscriptions">Subscriptions</mat-tab>
+    <mat-tab label="Created">Created</mat-tab>
+</mat-tab-group>

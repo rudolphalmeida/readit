@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 
 import { PostService } from "../posts/post.service";
 import { Post, PostList } from "../posts/post";
-import { BehaviorSubject } from "rxjs";
 
 @Component({
     selector: "readit-user-home",
@@ -10,22 +10,26 @@ import { BehaviorSubject } from "rxjs";
     styleUrls: ["./user-home.component.less"],
 })
 export class UserHomeComponent implements OnInit {
-    posts: BehaviorSubject<Post[]> = new BehaviorSubject<Post[]>([]);
-    next_posts_page: string | null = null;
-    previous_posts_page: string | null = null;
+    home_posts: BehaviorSubject<Post[]> = new BehaviorSubject<Post[]>([]);
+    home_post_list: BehaviorSubject<PostList | null> = new BehaviorSubject<PostList | null>(null);
 
     constructor(private postService: PostService) {}
 
     ngOnInit(): void {
-        this.getPosts();
+        this.home_post_list.subscribe((post_list) => {
+            if (post_list == null) {
+                this.home_posts.next([]);
+            } else {
+                this.home_posts.next(post_list.results);
+            }
+        });
+        this.getHomePosts();
     }
 
-    getPosts() {
-        this.postService.getPosts().subscribe({
+    getHomePosts() {
+        this.postService.getHomePosts().subscribe({
             next: (postList: PostList) => {
-                this.posts.next(postList.results);
-                this.next_posts_page = postList.next;
-                this.previous_posts_page = postList.previous;
+                this.home_post_list.next(postList);
             },
             error: (error) => {
                 console.log(error);
@@ -33,7 +37,7 @@ export class UserHomeComponent implements OnInit {
         });
     }
 
-    loadNextPageOfPosts(): void {}
+    loadNextHomePosts() {}
 
-    loadPreviousPageOfPosts(): void {}
+    loadPrevHomePosts() {}
 }

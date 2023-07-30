@@ -22,7 +22,8 @@ import { TokenInjectInterceptor } from "./utils/token-inject.interceptor";
 import { UserProfileComponent } from "./user-profile/user-profile.component";
 import { AsUsernamePipe } from "./utils/as-username.pipe";
 import { PostListComponent } from "./post-list/post-list.component";
-import { AsSubreaditPipe } from './utils/as-subreadit.pipe';
+import { AsSubreaditPipe } from "./utils/as-subreadit.pipe";
+import { MatTabsModule } from "@angular/material/tabs";
 
 @NgModule({
     declarations: [
@@ -51,6 +52,7 @@ import { AsSubreaditPipe } from './utils/as-subreadit.pipe';
         MatIconModule,
         MatSnackBarModule,
         MatMenuModule,
+        MatTabsModule,
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInjectInterceptor, multi: true }],
     bootstrap: [AppComponent],
