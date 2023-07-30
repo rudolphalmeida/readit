@@ -12,7 +12,7 @@ router.register(r"posts", views.PostViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path(
-        "posts/<str:username>",
+        "posts/u/<str:username>",
         views.PostViewSet.as_view({"get": "list"}),
         name="user_posts",
     ),

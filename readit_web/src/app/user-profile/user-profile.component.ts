@@ -61,7 +61,7 @@ export class UserProfileComponent implements OnInit {
             this.http.get(apiUrl(`users/${this.username}`), { withCredentials: true }),
         )) as User;
 
-        this.postService.getUserPosts(this.username).subscribe({
+        this.postService.getUserPostsFromUrl(this.user_details.posts_url).subscribe({
             next: (postList: PostList) => {
                 this.post_list.next(postList);
             },
