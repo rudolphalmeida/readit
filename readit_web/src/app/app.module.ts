@@ -24,6 +24,7 @@ import { AsUsernamePipe } from "./utils/as-username.pipe";
 import { PostListComponent } from "./post-list/post-list.component";
 import { AsSubreaditPipe } from "./utils/as-subreadit.pipe";
 import { MatTabsModule } from "@angular/material/tabs";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 @NgModule({
     declarations: [
@@ -53,6 +54,7 @@ import { MatTabsModule } from "@angular/material/tabs";
         MatSnackBarModule,
         MatMenuModule,
         MatTabsModule,
+        MatPaginatorModule,
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInjectInterceptor, multi: true }],
     bootstrap: [AppComponent],

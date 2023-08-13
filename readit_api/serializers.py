@@ -53,4 +53,5 @@ class PostSerializer(serializers.ModelSerializer):
             "posted_by",
             "created_on",
             "posted_subreadit",
+            "url",
         ]
