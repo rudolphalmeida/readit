@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "readit"
+version = "0.1.0"
+description = "A Reddit Clone built using Django and Angular"
+authors = ["Rudolph Almeida <rudolf1.almeida@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+Django = "^4.2.4"
+djangorestframework = "^3.14.0"
+django-cors-headers = "^4.2.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.7.0"
+flake8 = "^6.1.0"
+mypy = "^1.5.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
