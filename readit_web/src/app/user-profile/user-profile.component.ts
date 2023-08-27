@@ -8,6 +8,8 @@ import { apiUrl } from "../utils/api-util";
 import { User } from "../user-auth/user-auth";
 import { Post, PostList } from "../posts/post";
 import { PostService } from "../posts/post.service";
+import {Subreadit, SubreaditList} from "../subreadits/subreadit";
+import {SubreaditService} from "../subreadits/subreadit.service";
 
 @Component({
     selector: "readit-user-profile",
@@ -20,12 +22,16 @@ export class UserProfileComponent implements OnInit {
     post_list: BehaviorSubject<PostList | null> = new BehaviorSubject<PostList | null>(null);
     posts: BehaviorSubject<Post[]> = new BehaviorSubject<Post[]>([]);
 
+    subscribed_list: BehaviorSubject<SubreaditList | null> = new BehaviorSubject<SubreaditList | null>(null);
+    subscribed_subreadits: BehaviorSubject<Subreadit[]> = new BehaviorSubject<Subreadit[]>([]);
+
     constructor(
         private userAuthService: UserAuthService,
         private route: ActivatedRoute,
         private router: Router,
         private http: HttpClient,
         private postService: PostService,
+        private subreaditService: SubreaditService,
     ) {}
 
     ngOnInit() {
@@ -50,6 +56,14 @@ export class UserProfileComponent implements OnInit {
                 this.posts.next(post_list.results);
             }
         });
+
+        this.subscribed_list.subscribe((subscribed_list) => {
+            if (subscribed_list == null) {
+                this.subscribed_subreadits.next([]);
+            } else {
+                this.subscribed_subreadits.next(subscribed_list.results);
+            }
+        })
     }
 
     async loadUserProfile() {
@@ -69,9 +83,22 @@ export class UserProfileComponent implements OnInit {
                 console.log(error);
             },
         });
+
+        this.subreaditService.getUserSubscribedSubreadits(this.username).subscribe( {
+            next: (subscribed_list: SubreaditList) => {
+                this.subscribed_list.next(subscribed_list);
+            },
+            error: (error) => {
+                console.log(error);
+            }
+        });
     }
 
     loadPrevHomePosts() {}
 
     loadNextHomePosts() {}
+
+    loadPrevSubscribedSubreadits() {}
+
+    loadNextSubscribedSubreadits() {}
 }

@@ -1,0 +1,5 @@
+<mat-list>
+    <mat-list-item *ngFor="let subreadit of subreadits | async">
+        {{ subreadit.name | asSubreadit }}
+    </mat-list-item>
+</mat-list>

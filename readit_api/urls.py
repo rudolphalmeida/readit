@@ -5,7 +5,6 @@ from readit_api import views
 
 router = routers.DefaultRouter()
 router.register(r"users", views.UserViewSet)
-router.register(r"subreadits", views.SubreaditViewSet)
 router.register(r"posts", views.PostViewSet)
 
 # Wire up our API using automatic URL routing.
@@ -15,6 +14,11 @@ urlpatterns = [
         "posts/u/<str:username>",
         views.PostViewSet.as_view({"get": "list"}),
         name="user_posts",
+    ),
+    path(
+        "subreadits/subscribed/u/<str:username>",
+        views.SubscribedSubreaditViewSet.as_view({"get": "list"}),
+        name="user_subscribes",
     ),
     path("", include(router.urls)),
     path(r"auth/login/", views.LoginView.as_view(), name="knox_login"),

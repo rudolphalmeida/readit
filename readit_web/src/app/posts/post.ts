@@ -1,3 +1,5 @@
+import {PaginatedEndpoint} from "../utils/paginated_endpoint";
+
 export interface Post {
     id: number;
     title: string;
@@ -7,9 +9,4 @@ export interface Post {
     posted_subreadit: string;
 }
 
-export interface PostList {
-    count: number;
-    next: string | null;
-    previous: string | null;
-    results: Post[];
-}
+export type PostList = PaginatedEndpoint<Post>;

@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from knox.auth import TokenAuthentication
 from knox.views import LoginView as KnoxLoginView
 from rest_framework import viewsets, permissions
 from rest_framework.authentication import BasicAuthentication
@@ -23,10 +24,15 @@ class UserViewSet(viewsets.ModelViewSet):
     lookup_field = "username"
 
 
-class SubreaditViewSet(viewsets.ModelViewSet):
-    queryset = Subreadit.objects.all()
+class SubscribedSubreaditViewSet(viewsets.ModelViewSet):
     serializer_class = SubreaditSerializer
-    authentication_classes = tuple()
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_queryset(self):
+        username = self.kwargs.get("username")
+        user = User.objects.get(username=username)
+        return user.subscribes.all()
 
 
 class PostViewSet(viewsets.ModelViewSet):

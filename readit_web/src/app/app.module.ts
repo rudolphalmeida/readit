@@ -25,6 +25,8 @@ import { PostListComponent } from "./post-list/post-list.component";
 import { AsSubreaditPipe } from "./utils/as-subreadit.pipe";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatListModule } from "@angular/material/list";
+import { SubreaditListComponent } from './subreadit-list/subreadit-list.component';
 
 @NgModule({
     declarations: [
@@ -36,6 +38,7 @@ import { MatPaginatorModule } from "@angular/material/paginator";
         AsUsernamePipe,
         PostListComponent,
         AsSubreaditPipe,
+        SubreaditListComponent,
     ],
     imports: [
         FormsModule,
@@ -55,6 +58,7 @@ import { MatPaginatorModule } from "@angular/material/paginator";
         MatMenuModule,
         MatTabsModule,
         MatPaginatorModule,
+        MatListModule
     ],
     providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInjectInterceptor, multi: true }],
     bootstrap: [AppComponent],
