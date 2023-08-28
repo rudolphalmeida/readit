@@ -6,27 +6,20 @@ from readit_api.models import Post, Subreadit
 
 
 class UserSerializer(serializers.ModelSerializer):
-    posts_url = serializers.HyperlinkedRelatedField(
-        many=True,
-        read_only=True,
-        view_name="user_posts",
-        lookup_field="username",
-        lookup_url_kwarg="username",
-    )
+    posts_url = serializers.URLField(read_only=True)
+    subscribed_subreadits_url = serializers.URLField(read_only=True)
 
     class Meta:
         model = User
-        fields = [
-            "id",
-            "username",
-            "email",
-            "posts_url",
-        ]
+        fields = ["id", "username", "email", "posts_url", "subscribed_subreadits_url"]
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data["posts_url"] = self.context["request"].build_absolute_uri(
             reverse("user_posts", kwargs={"username": instance.username})
+        )
+        data["subscribed_subreadits_url"] = self.context["request"].build_absolute_uri(
+            reverse("user_subscribes", kwargs={"username": instance.username})
         )
         return data
 

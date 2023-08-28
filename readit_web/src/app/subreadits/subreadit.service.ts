@@ -12,6 +12,10 @@ export class SubreaditService {
     constructor(private http: HttpClient) {
     }
 
+    getUserSubscribedSubreaditsFromUrl(url: string): Observable<SubreaditList> {
+        return this.http.get(url) as Observable<SubreaditList>;
+    }
+
     getUserSubscribedSubreadits(username: string): Observable<SubreaditList> {
         return this.http.get(apiUrl(`subreadits/subscribed/u/${username}`)) as Observable<SubreaditList>;
     }

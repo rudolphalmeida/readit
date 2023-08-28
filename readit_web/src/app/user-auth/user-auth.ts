@@ -3,6 +3,7 @@ export interface User {
     username: string;
     email: string;
     posts_url: string;
+    subscribed_subreadits_url: string;
 }
 
 export interface AuthenticatedUser {

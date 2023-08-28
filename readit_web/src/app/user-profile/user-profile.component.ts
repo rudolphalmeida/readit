@@ -84,7 +84,7 @@ export class UserProfileComponent implements OnInit {
             },
         });
 
-        this.subreaditService.getUserSubscribedSubreadits(this.username).subscribe( {
+        this.subreaditService.getUserSubscribedSubreaditsFromUrl(this.user_details.subscribed_subreadits_url).subscribe( {
             next: (subscribed_list: SubreaditList) => {
                 this.subscribed_list.next(subscribed_list);
             },
