@@ -39,6 +39,16 @@ class SubreaditSerializer(serializers.ModelSerializer):
         model = Subreadit
         fields = ["name", "creator", "owner"]
 
+    def create(self, validated_data):
+        request = self.context.get("request")
+        if request and hasattr(request, "user"):
+            user = request.user
+        else:
+            raise Exception("Expected a user with the request")
+        validated_data["owner"] = user
+        validated_data["creator"] = user
+        return super(SubreaditSerializer, self).create(validated_data)
+
 
 class PostSerializer(serializers.ModelSerializer):
     posted_by = serializers.SlugRelatedField(read_only=True, slug_field="username")

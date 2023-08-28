@@ -16,6 +16,11 @@ urlpatterns = [
         name="user_posts",
     ),
     path(
+        "subreadits/",
+        views.CreateSubreaditView.as_view(),
+        name="subreadit_create",
+    ),
+    path(
         "subreadits/subscribed/u/<str:username>",
         views.SubscribedSubreaditViewSet.as_view({"get": "list"}),
         name="user_subscribes",
