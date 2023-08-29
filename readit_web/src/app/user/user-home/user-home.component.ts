@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 
-import { PostService } from "../posts/post.service";
-import { Post, PostList } from "../posts/post";
+import { PostService } from "../../posts/post.service";
+import { Post, PostList } from "../../posts/post";
 
 @Component({
     selector: "readit-user-home",

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { Post } from "../posts/post";
+import { Post } from "../post";
 import { BehaviorSubject } from "rxjs";
 
 @Component({

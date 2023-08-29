@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Subreadit(models.Model):
-    name = models.CharField(max_length=100, blank=False, null=False)
+    name = models.CharField(max_length=100, blank=False, null=False, unique=True)
 
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,

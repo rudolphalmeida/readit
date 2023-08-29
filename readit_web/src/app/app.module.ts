@@ -15,30 +15,32 @@ import { MatMenuModule } from "@angular/material/menu";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { UserHomeComponent } from "./user-home/user-home.component";
-import { LoginComponent } from "./user-auth/login/login.component";
-import { LoginModalComponent } from "./user-auth/login-modal/login-modal.component";
+import { UserHomeComponent } from "./user/user-home/user-home.component";
+import { UserMenuComponent } from "./user/login/user-menu.component";
+import { LoginModalComponent } from "./user/login-modal/login-modal.component";
 import { TokenInjectInterceptor } from "./utils/token-inject.interceptor";
-import { UserProfileComponent } from "./user-profile/user-profile.component";
+import { UserProfileComponent } from "./user/user-profile/user-profile.component";
 import { AsUsernamePipe } from "./utils/as-username.pipe";
-import { PostListComponent } from "./post-list/post-list.component";
+import { PostListComponent } from "./posts/post-list/post-list.component";
 import { AsSubreaditPipe } from "./utils/as-subreadit.pipe";
 import { MatTabsModule } from "@angular/material/tabs";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatListModule } from "@angular/material/list";
-import { SubreaditListComponent } from './subreadit-list/subreadit-list.component';
+import { SubreaditListComponent } from './subreadits/subreadit-list/subreadit-list.component';
+import { NewSubreaditComponent } from './subreadits/new-subreadit/new-subreadit.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         UserHomeComponent,
-        LoginComponent,
+        UserMenuComponent,
         LoginModalComponent,
         UserProfileComponent,
         AsUsernamePipe,
         PostListComponent,
         AsSubreaditPipe,
         SubreaditListComponent,
+        NewSubreaditComponent,
     ],
     imports: [
         FormsModule,

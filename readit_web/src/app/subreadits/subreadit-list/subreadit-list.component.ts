@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
-import {Subreadit} from "../subreadits/subreadit";
+import {Subreadit} from "../subreadit";
 
 @Component({
   selector: 'readit-subreadit-list',

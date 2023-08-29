@@ -40,7 +40,10 @@ class SubreaditSerializer(serializers.ModelSerializer):
             raise Exception("Expected a user with the request")
         validated_data["owner"] = user
         validated_data["creator"] = user
-        return super(SubreaditSerializer, self).create(validated_data)
+        subreadit = super(SubreaditSerializer, self).create(validated_data)
+        subreadit.subscribers.add(user)
+        subreadit.save()
+        return subreadit
 
 
 class PostSerializer(serializers.ModelSerializer):

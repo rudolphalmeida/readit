@@ -3,13 +3,13 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { HttpClient } from "@angular/common/http";
 import { BehaviorSubject, firstValueFrom } from "rxjs";
 
-import { UserAuthService } from "../user-auth/user-auth.service";
-import { apiUrl } from "../utils/api-util";
-import { User } from "../user-auth/user-auth";
-import { Post, PostList } from "../posts/post";
-import { PostService } from "../posts/post.service";
-import {Subreadit, SubreaditList} from "../subreadits/subreadit";
-import {SubreaditService} from "../subreadits/subreadit.service";
+import { UserAuthService } from "../user-auth.service";
+import { apiUrl } from "../../utils/api-util";
+import { User } from "../user-auth";
+import { Post, PostList } from "../../posts/post";
+import { PostService } from "../../posts/post.service";
+import {Subreadit, SubreaditList} from "../../subreadits/subreadit";
+import {SubreaditService} from "../../subreadits/subreadit.service";
 
 @Component({
     selector: "readit-user-profile",

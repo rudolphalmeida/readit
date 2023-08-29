@@ -3,15 +3,14 @@ import {UserAuthService} from '../user-auth.service';
 import {MatDialog} from '@angular/material/dialog';
 import {LoginModalComponent} from '../login-modal/login-modal.component';
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {NewSubreaditComponent} from "../../subreadits/new-subreadit/new-subreadit.component";
 
 @Component({
     selector: 'readit-login-component',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.less'],
+    templateUrl: './user-menu.component.html',
+    styleUrls: ['./user-menu.component.less'],
 })
-export class LoginComponent {
-    showLoginForm: boolean = false;
-
+export class UserMenuComponent {
     constructor(
         private userAuthService: UserAuthService,
         public dialog: MatDialog,
@@ -24,14 +23,14 @@ export class LoginComponent {
     }
 
     get username(): string | null {
-        return  this.userAuthService.loggedInUserName;
+        return this.userAuthService.loggedInUserName;
     }
 
     openLoginDialog(): void {
         const dialogRef = this.dialog.open(LoginModalComponent, {});
         dialogRef
             .afterClosed()
-            .subscribe((_loggedIn: boolean) => {
+            .subscribe(_ => {
             });
     }
 
@@ -39,6 +38,12 @@ export class LoginComponent {
         await this.userAuthService.logout();
         this.snackBar.open('Logged out successfully', undefined, {
             duration: 3000
+        });
+    }
+
+    createNewSubreadit() {
+        const dialogRef = this.dialog.open(NewSubreaditComponent, {});
+        dialogRef.afterClosed().subscribe(_ => {
         });
     }
 }
