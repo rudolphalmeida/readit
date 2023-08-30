@@ -1,8 +1,9 @@
-import { Component, OnInit } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import {Component, OnInit} from "@angular/core";
+import {BehaviorSubject} from "rxjs";
 
-import { PostService } from "../../posts/post.service";
-import { Post, PostList } from "../../posts/post";
+import {PostService} from "../../posts/post.service";
+import {Post, PostList} from "../../posts/post";
+import {UserAuthService} from "../user-auth.service";
 
 @Component({
     selector: "readit-user-home",
@@ -13,7 +14,8 @@ export class UserHomeComponent implements OnInit {
     home_posts: BehaviorSubject<Post[]> = new BehaviorSubject<Post[]>([]);
     home_post_list: BehaviorSubject<PostList | null> = new BehaviorSubject<PostList | null>(null);
 
-    constructor(private postService: PostService) {}
+    constructor(private postService: PostService, private userAuthService: UserAuthService) {
+    }
 
     ngOnInit(): void {
         this.home_post_list.subscribe((post_list) => {
@@ -27,7 +29,9 @@ export class UserHomeComponent implements OnInit {
     }
 
     getHomePosts() {
-        this.postService.getHomePosts().subscribe({
+        const username = this.userAuthService.loggedInUserName;
+        const postsObservable = username ? this.postService.getHomePostsForUser(username) : this.postService.getGeneralHomePosts();
+        postsObservable.subscribe({
             next: (postList: PostList) => {
                 this.home_post_list.next(postList);
             },
@@ -37,7 +41,9 @@ export class UserHomeComponent implements OnInit {
         });
     }
 
-    loadNextHomePosts() {}
+    loadNextHomePosts() {
+    }
 
-    loadPrevHomePosts() {}
+    loadPrevHomePosts() {
+    }
 }

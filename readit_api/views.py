@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AnonymousUser
 from knox.auth import TokenAuthentication
 from knox.views import LoginView as KnoxLoginView
 from rest_framework import viewsets, permissions
@@ -40,13 +40,26 @@ class SubscribedSubreaditViewSet(viewsets.ModelViewSet):
         return user.subscribes.all()
 
 
-class PostViewSet(viewsets.ModelViewSet):
+class UserPostsViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     authentication_classes = tuple()
 
     def get_queryset(self):
         username = self.kwargs.get("username")
-        if not username:
-            return Post.objects.all()
         return Post.objects.filter(posted_by__username=username)
+
+
+class FrontPagePostsViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    authentication_classes = tuple()
+
+    def get_queryset(self):
+        username = self.kwargs.get("username")
+        user = User.objects.get(username=username) if username else None
+        if user is None:  # TODO: Return trending posts from the past week
+            return Post.objects.all()
+
+        subscriptions = user.subscribes.all()
+        return Post.objects.filter(posted_subreadit__in=subscriptions)

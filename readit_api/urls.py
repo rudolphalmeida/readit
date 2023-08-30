@@ -5,14 +5,24 @@ from readit_api import views
 
 router = routers.DefaultRouter()
 router.register(r"users", views.UserViewSet)
-router.register(r"posts", views.PostViewSet)
+router.register(r"posts", views.UserPostsViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path(
+        "posts/home",
+        views.FrontPagePostsViewSet.as_view({"get": "list"}),
+        name="general_home_posts",
+    ),
+    path(
+        "posts/home/u/<str:username>",
+        views.FrontPagePostsViewSet.as_view({"get": "list"}),
+        name="user_home_posts",
+    ),
+    path(
         "posts/u/<str:username>",
-        views.PostViewSet.as_view({"get": "list"}),
+        views.UserPostsViewSet.as_view({"get": "list"}),
         name="user_posts",
     ),
     path(

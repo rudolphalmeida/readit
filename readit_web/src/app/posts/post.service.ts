@@ -11,8 +11,12 @@ import { apiUrl } from "../utils/api-util";
 export class PostService {
     constructor(private http: HttpClient) {}
 
-    getHomePosts(): Observable<PostList> {
-        return this.http.get(apiUrl("posts")) as Observable<PostList>;
+    getGeneralHomePosts(): Observable<PostList> {
+        return this.http.get(apiUrl("posts/home")) as Observable<PostList>;
+    }
+
+    getHomePostsForUser(username: string): Observable<PostList> {
+        return this.http.get(apiUrl(`posts/home/u/${username}`)) as Observable<PostList>;
     }
 
     getUserPostsFromUrl(url: string): Observable<PostList> {
