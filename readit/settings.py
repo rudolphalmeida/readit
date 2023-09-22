@@ -42,6 +42,8 @@ CORS_ALLOW_CREDENTIALS: bool = True
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
+    "channels",
     "corsheaders",
     "rest_framework",
     "knox",
@@ -87,7 +89,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "readit.wsgi.application"
+# WSGI_APPLICATION = "readit.wsgi.application"
+ASGI_APPLICATION = "readit.asgi.application"
 
 
 # Database
