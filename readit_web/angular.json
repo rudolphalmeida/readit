@@ -66,10 +66,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "readit_web:build:production"
+              "buildTarget": "readit_web:build:production"
             },
             "development": {
-              "browserTarget": "readit_web:build:development"
+              "buildTarget": "readit_web:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -77,7 +77,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "readit_web:build"
+            "buildTarget": "readit_web:build"
           }
         },
         "test": {
